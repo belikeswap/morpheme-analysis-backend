@@ -17,7 +17,7 @@ CORS(app)
 
 
 @app.route("/", methods=["GET", "HEAD", "OPTIONS"])
-def keep_alive():
+def home():
     return "OK", 200
 
 
