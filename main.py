@@ -37,11 +37,10 @@ def analyze():
         sentences = sent_tokenize(text)
         for s in sentences:
             words = word_tokenize(s)
-            parts = []
             for index, word in enumerate(words):
-                parts.append(m.parse(word))
-
-            results.append({"word": word, "index": index, "parts": parts})
+                result = m.parse(word)
+                result["index"] = index
+                results.append(result)
 
         return results
     else:
