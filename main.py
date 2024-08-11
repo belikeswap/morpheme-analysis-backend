@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 from nltk import download
 from nltk.tokenize import sent_tokenize, word_tokenize
 from morphemes import Morphemes
@@ -12,20 +13,17 @@ print(m.parse("promise"))
 
 
 app = Flask(__name__)
+CORS(app)
 
 
-def application(environ, start_response):
-    if environ["REQUEST_METHOD"] == "OPTIONS":
-        start_response(
-            "200 OK",
-            [
-                ("Content-Type", "application/json"),
-                ("Access-Control-Allow-Origin", "*"),
-                ("Access-Control-Allow-Headers", "Authorization, Content-Type"),
-                ("Access-Control-Allow-Methods", "POST"),
-            ],
-        )
-        return ""
+@app.route("/", methods=["GET", "HEAD", "OPTIONS"])
+def keep_alive():
+    return "OK", 200
+
+
+@app.route("/keep-alive", methods=["GET"])
+def keep_alive():
+    return "OK", 200
 
 
 @app.route("/analyse", methods=["POST"])
