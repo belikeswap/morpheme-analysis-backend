@@ -1,6 +1,9 @@
 from flask import Flask, request
+from nltk import download
 from nltk.tokenize import sent_tokenize, word_tokenize
 from morphemes import Morphemes
+
+download("punkt_tab")
 
 path = "./data"
 
