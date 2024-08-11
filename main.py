@@ -16,11 +16,12 @@ app = Flask(__name__)
 
 @app.route("/analyse", methods=["POST"])
 def analyze():
-    if request.json and request.json["text"]:
+    data = request.get_json()
+    if data and data["text"]:
 
         results = []
 
-        text = request.json["text"]
+        text = data["text"]
         sentences = sent_tokenize(text)
         for s in sentences:
             words = word_tokenize(s)
